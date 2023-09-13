@@ -1,0 +1,16 @@
+name: Send discord notification
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Send Discord notification
+      env:
+        WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+      run: |
+        COMMIT_MESSAGE=$(git log -1 --pretty=format:"%s")
+        COMMIT_DESCRIPTION=$(git log -1 --pretty=format:"%b")
+        curl -X POST -H "Content-Type: application/json" -d "{ \"content\": \"New commit! Check out the latest changes: https://github.com/Metaverse-Crowdsource/DarkFlow/commits/${{ github.sha }}\", \"embeds\": [ { \"title\": \"$COMMIT_MESSAGE\", \"description\": \"$COMMIT_DESCRIPTION\" } ] }" $WEBHOOK_URL
