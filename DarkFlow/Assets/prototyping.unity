@@ -3472,6 +3472,7 @@ GameObject:
   - component: {fileID: 552003996}
   - component: {fileID: 552004004}
   - component: {fileID: 552004003}
+  - component: {fileID: 552004005}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3584,6 +3585,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  jumpHeight: 2
+  gravityValue: -9.81
 --- !u!114 &552004004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3596,6 +3599,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 193e8160d665e43c4b9e57c2aeb2d285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &552004005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 552003995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f1434436c6febfd6a1181aabf93fa97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSensitivity: 100
 --- !u!1001 &558039755
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11206,8 +11222,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d16b45d4b2803189ca1a056fcfded061, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 50
-  playerBody: {fileID: 1925650320}
+  mouseSensitivity: 100
+  playerBody: {fileID: 0}
 --- !u!1001 &1925806807
 PrefabInstance:
   m_ObjectHideFlags: 0
