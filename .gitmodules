@@ -1,0 +1,4 @@
+[submodule "DarkFlowPrivate"]
+	path = DarkFlowPrivate
+	url = https://github.com/Metaverse-Crowdsource/DarkFlowPrivate
+	branch = main
