@@ -4,29 +4,36 @@ using UnityEngine.SceneManagement;
 public class CharacterSelection : MonoBehaviour
 {
 	public GameObject[] characters;
-	public int selectedCharacter = 0;
+	public int selectedCharacterIndex = 0;
+	//public string selectedCharacterName = "";
 
 	public void NextCharacter()
 	{
-		characters[selectedCharacter].SetActive(false);
-		selectedCharacter = (selectedCharacter + 1) % characters.Length;
-		characters[selectedCharacter].SetActive(true);
+		characters[selectedCharacterIndex].SetActive(false);
+		selectedCharacterIndex = (selectedCharacterIndex + 1) % characters.Length;
+		characters[selectedCharacterIndex].SetActive(true);
+		
+		//selectedCharacterName = characters[selectedCharacterIndex].name;
+		
+		//Debug.Log(selectedCharacterName);
 	}
 
 	public void PreviousCharacter()
 	{
-		characters[selectedCharacter].SetActive(false);
-		selectedCharacter--;
-		if (selectedCharacter < 0)
+		characters[selectedCharacterIndex].SetActive(false);
+		selectedCharacterIndex--;
+		if (selectedCharacterIndex < 0)
 		{
-			selectedCharacter += characters.Length;
+			selectedCharacterIndex += characters.Length;
 		}
-		characters[selectedCharacter].SetActive(true);
+		characters[selectedCharacterIndex].SetActive(true);
 	}
 
 	public void StartGame()
 	{
-		PlayerPrefs.SetInt("selectedCharacter", selectedCharacter);
-		SceneManager.LoadScene(2, LoadSceneMode.Single);
+		PlayerPrefs.SetInt("selectedCharacterIndex", selectedCharacterIndex);
+		//PlayerPrefs.SetString("selectedCharacterName", selectedCharacterName);
+		
+		SceneManager.LoadScene(1, LoadSceneMode.Single);
 	}
 }
