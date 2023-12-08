@@ -271,12 +271,12 @@ QualitySettings:
     softParticles: 0
     softVegetation: 1
     realtimeReflectionProbes: 1
-    billboardsFaceCameraPosition: 0
+    billboardsFaceCameraPosition: 1
     useLegacyDetailDistribution: 1
     vSyncCount: 0
     realtimeGICPUUsage: 100
     lodBias: 2
-    maximumLODLevel: 0
+    maximumLODLevel: 4
     enableLODCrossFade: 1
     streamingMipmapsActive: 1
     streamingMipmapsAddAllCameras: 1
