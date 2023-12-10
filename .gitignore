@@ -41,3 +41,6 @@ sysinfo.txt
 *.idea/
 
 *Sirenix/Demos**
+
+# ClonesManager 
+*_clone_[0-9]*/
