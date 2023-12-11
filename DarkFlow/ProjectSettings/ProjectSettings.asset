@@ -51,7 +51,7 @@ PlayerSettings:
   unsupportedMSAAFallback: 0
   m_SpriteBatchVertexThreshold: 300
   m_MTRendering: 1
-  mipStripping: 1
+  mipStripping: 0
   numberOfMipsStripped: 0
   numberOfMipsStrippedPerMipmapLimitGroup: {}
   m_StackTraceTypes: 010000000100000001000000010000000100000001000000
@@ -137,8 +137,7 @@ PlayerSettings:
   vulkanEnableCommandBufferRecycling: 1
   loadStoreDebugModeEnabled: 0
   bundleVersion: 1.0
-  preloadedAssets:
-  - {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}
+  preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -179,7 +178,7 @@ PlayerSettings:
   CreateWallpaper: 0
   APKExpansionFiles: 0
   keepLoadedShadersAlive: 0
-  StripUnusedMeshComponents: 1
+  StripUnusedMeshComponents: 0
   strictShaderVariantMatching: 0
   VertexChannelCompressionMask: 214
   iPhoneSdkVersion: 988
@@ -632,7 +631,9 @@ PlayerSettings:
     tvOS: UNITY_POST_PROCESSING_STACK_V2
   additionalCompilerArguments: {}
   platformArchitecture: {}
-  scriptingBackend: {}
+  scriptingBackend:
+    Server: 1
+    Standalone: 0
   il2cppCompilerConfiguration: {}
   il2cppCodeGeneration: {}
   managedStrippingLevel:
@@ -644,6 +645,7 @@ PlayerSettings:
     PS5: 1
     QNX: 1
     Stadia: 1
+    Standalone: 4
     VisionOS: 1
     WebGL: 1
     Windows Store Apps: 1
@@ -742,7 +744,7 @@ PlayerSettings:
   projectName: 
   organizationId: 
   cloudEnabled: 0
-  legacyClampBlendShapeWeights: 1
+  legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
   platformRequiresReadableAssets: 0
   virtualTexturingSupportEnabled: 0
