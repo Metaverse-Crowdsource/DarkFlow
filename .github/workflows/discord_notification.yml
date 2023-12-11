@@ -10,8 +10,8 @@ jobs:
 
     - name: Send Discord notification to private dark flow dev discord server
       env:
-        URC_WEBHOOK_ID: ${{ secrets.DISCORD_DEV_SERVER_ID }}
-        URC_WEBHOOK_TOKEN: ${{ secrets.DISCORD_DEV_SERVER_TOKEN }}
+        DISCORD_DEV_SERVER_ID: ${{ secrets.DISCORD_DEV_SERVER_ID }}
+        DISCORD_DEV_SERVER_TOKEN: ${{ secrets.DISCORD_DEV_SERVER_TOKEN }}
       run: |
         COMMIT_MESSAGE=$(git log -1 --pretty=format:"%s")
         COMMIT_AUTHOR=$(git log -1 --pretty=format:"%an")
