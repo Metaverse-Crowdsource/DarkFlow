@@ -8,7 +8,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Send Discord notification to private darkflow dev discord server
+    - name: Send Discord notification to private dark flow dev discord server
       env:
         URC_WEBHOOK_ID: ${{ secrets.DISCORD_DEV_SERVER_ID }}
         URC_WEBHOOK_TOKEN: ${{ secrets.DISCORD_DEV_SERVER_TOKEN }}
