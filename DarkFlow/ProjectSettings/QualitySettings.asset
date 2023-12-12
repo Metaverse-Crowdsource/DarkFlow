@@ -4,7 +4,7 @@
 QualitySettings:
   m_ObjectHideFlags: 0
   serializedVersion: 5
-  m_CurrentQuality: 1
+  m_CurrentQuality: 2
   m_QualitySettings:
   - serializedVersion: 3
     name: Fastest
@@ -308,8 +308,8 @@ QualitySettings:
     PSM: 5
     PSP2: 2
     Samsung TV: 2
-    Server: 0
-    Standalone: 3
+    Server: 2
+    Standalone: 2
     Tizen: 2
     Web: 5
     WebGL: 3
