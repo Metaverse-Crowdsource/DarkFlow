@@ -1,5 +1,7 @@
-﻿using Mirror;
- using UnityEngine;
+﻿using Cinemachine;
+using Mirror;
+using UnityEngine;
+
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
@@ -131,6 +133,19 @@ namespace StarterAssets
             {
                 _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
             }
+        }
+
+        public override void OnStartAuthority()
+        {
+            base.OnStartAuthority();
+            PlayerInput playerInput = GetComponent<PlayerInput>();
+            playerInput.enabled = true;
+        }
+
+        public override void OnStartLocalPlayer()
+        {
+            //base.OnStartLocalPlayer();
+            GameObject.FindGameObjectWithTag("PlayerFollowCamera").GetComponent<CinemachineVirtualCamera>().Follow = transform.GetChild(0).transform;
         }
 
         private void Start()
