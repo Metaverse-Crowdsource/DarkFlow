@@ -5,15 +5,12 @@ public class CharacterSelection : MonoBehaviour
 {
 	public GameObject[] characters;
 	public int selectedCharacterIndex = 0;
-	//public string selectedCharacterName = "";
 
 	public void NextCharacter()
 	{
 		characters[selectedCharacterIndex].SetActive(false);
 		selectedCharacterIndex = (selectedCharacterIndex + 1) % characters.Length;
 		characters[selectedCharacterIndex].SetActive(true);
-		
-		//selectedCharacterName = characters[selectedCharacterIndex].name;
 		
 		//Debug.Log(selectedCharacterName);
 	}
@@ -32,8 +29,6 @@ public class CharacterSelection : MonoBehaviour
 	public void StartGame()
 	{
 		PlayerPrefs.SetInt("selectedCharacterIndex", selectedCharacterIndex);
-		//PlayerPrefs.SetString("selectedCharacterName", selectedCharacterName);
-		
 		SceneManager.LoadScene(1, LoadSceneMode.Single);
 	}
 }
