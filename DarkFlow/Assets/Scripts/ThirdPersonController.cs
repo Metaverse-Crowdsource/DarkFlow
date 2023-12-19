@@ -1,5 +1,4 @@
 ﻿using Cinemachine;
-using Mirror;
 using UnityEngine;
 
 #if ENABLE_INPUT_SYSTEM 
@@ -15,7 +14,7 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM 
     [RequireComponent(typeof(PlayerInput))]
 #endif
-    public class ThirdPersonController : NetworkBehaviour
+    public class ThirdPersonController : MonoBehaviour
     {
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
@@ -135,18 +134,7 @@ namespace StarterAssets
             }
         }
 
-        public override void OnStartAuthority()
-        {
-            base.OnStartAuthority();
-            PlayerInput playerInput = GetComponent<PlayerInput>();
-            playerInput.enabled = true;
-        }
 
-        public override void OnStartLocalPlayer()
-        {
-            //base.OnStartLocalPlayer();
-            GameObject.FindGameObjectWithTag("PlayerFollowCamera").GetComponent<CinemachineVirtualCamera>().Follow = transform.GetChild(0).transform;
-        }
 
         private void Start()
 
@@ -174,10 +162,7 @@ namespace StarterAssets
         private void Update()
         {
             
-            // exit from update if this is not the local player
-            if (!isLocalPlayer) return;
-            
-            
+              
             _hasAnimator = TryGetComponent(out _animator);
 
             JumpAndGravity();
