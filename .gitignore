@@ -44,3 +44,6 @@ sysinfo.txt
 
 # ClonesManager 
 *_clone_[0-9]*/
+
+# Ipynb checkpoints
+.ipynb_checkpoints

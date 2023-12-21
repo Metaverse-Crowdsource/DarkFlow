@@ -1,14 +1,58 @@
-name: Send discord notification
+name: Unity Build and Discord Notification
+
 on: [push]
 
 jobs:
-  build:
+  build-and-notify:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Checkout code
+    - name: Checkout Code
       uses: actions/checkout@v2
 
-    - name: Send Discord notification to private dark flow dev discord server
+    - name: Request Unity Activation File
+      uses: game-ci/unity-request-activation-file@v1
+      # Additional steps to setup Unity, including license activation
+
+    - name: Cache Library Folder
+      uses: actions/cache@v2
+      with:
+        path: Library
+        key: Library-${{ runner.os }}-${{ hashFiles('**/ProjectSettings/ProjectVersion.txt') }}
+        restore-keys: |
+          Library-${{ runner.os }}-
+
+    - name: Build Windows Game
+      uses: game-ci/unity-builder@v2
+      with:
+        projectPath: .
+        unityVersion: '2022.3.13f1' 
+        targetPlatform: StandaloneWindows64
+        buildName: game
+        buildsPath: Build/Windows
+
+    - name: Build Linux Game
+      uses: game-ci/unity-builder@v2
+      with:
+        projectPath: .
+        unityVersion: '2020.3.0f1'
+        targetPlatform: StandaloneLinux64
+        buildName: game
+        buildsPath: Build/Linux
+
+    - name: Build macOS Game
+      uses: game-ci/unity-builder@v2
+      with:
+        projectPath: .
+        unityVersion: '2020.3.0f1'
+        targetPlatform: StandaloneOSX
+        buildName: game
+        buildsPath: Build/macOS
+
+    # Add a step for running tests if required
+
+    - name: Send Discord Notification
+      if: always() # This ensures the step runs whether the build succeeds or fails
       env:
         DISCORD_DEV_SERVER_ID: ${{ secrets.DISCORD_DEV_SERVER_ID }}
         DISCORD_DEV_SERVER_TOKEN: ${{ secrets.DISCORD_DEV_SERVER_TOKEN }}
@@ -17,3 +61,4 @@ jobs:
         COMMIT_AUTHOR=$(git log -1 --pretty=format:"%an")
         COMMIT_DESCRIPTION=$(git log -1 --pretty=format:"%b")
         curl -X POST -H "Content-Type: application/json" -d "{ \"content\": \"New commit by $COMMIT_AUTHOR! Check out the latest changes: https://github.com/Metaverse-Crowdsource/DarkFlow/commits/${{ github.sha }}\", \"embeds\": [ { \"title\": \"$COMMIT_MESSAGE\", \"description\": \"$COMMIT_DESCRIPTION\" } ] }" https://discord.com/api/webhooks/$DISCORD_DEV_SERVER_ID/$DISCORD_DEV_SERVER_TOKEN
+
