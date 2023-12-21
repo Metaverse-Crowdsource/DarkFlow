@@ -1,0 +1,42 @@
+# Treat everything not text if not specified
+# Avoid crlf messing up things like .asset and ProjectSettings (But we'd like to diff so we do not assign binary[-text -diff] tag)
+# You should never do line ending conversion on .asset, .asset could be CRLF(ProjectSettings) LF(Tile set config) or binary even if forced text(Lighting and Terrain Data)
+* -text
+
+# Unity visible meta is LF regardless of created platform
+*.meta text eol=lf
+
+# Human authored code
+# Files with auto crlf conversion, auto crlf is painful to get right
+# But we need it to avoid committing files with all line endings changed by text editor
+# Such commit will cripple [git blame]
+# We decided to force lf across platforms now for adding code as source hash calculation input
+# And we'd like source code having the same binary across Windows and macOS so that the souce hash would be calculated the same
+*.cs         text eol=lf
+*.json       text eol=lf
+
+# ShaderLab
+*.cginc      text eol=lf
+*.shader     text eol=lf
+
+# Gradle property
+*.properties text eol=lf
+
+# AndroidManifest and other XML files
+*.xml        text eol=lf
+
+# iOS plugin possible extensions
+*.h          text eol=lf
+*.c          text eol=lf
+*.cpp        text eol=lf
+*.m          text eol=lf
+*.mm         text eol=lf
+
+# NeXTSTEP property list
+*.plist      text eol=lf
+
+# GitLab and other services config
+*.yml        text eol=lf
+*.toml       text eol=lf
+
+
