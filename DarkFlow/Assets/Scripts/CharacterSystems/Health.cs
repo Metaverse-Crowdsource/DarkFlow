@@ -102,29 +102,25 @@ public class Health: NetworkBehaviour
 
         if (bodyPartHealth.ContainsKey(BodyPart.Head) && bodyPartHealth[BodyPart.Head] <= 0) // Let's be honest. Head Health being 0 means they are dead.
         {
-            InitializeHealth();
             Debug.Log("Should get your head looked at, it's missing!");
         }
         if (bodyPartHealth.ContainsKey(BodyPart.LeftLeg) && bodyPartHealth[BodyPart.LeftLeg] <= 0)
         {
-            InitializeHealth();
             Debug.Log("My leg!");
         }
         if (bodyPartHealth.ContainsKey(BodyPart.LeftArm) && bodyPartHealth[BodyPart.LeftArm] <= 0)
         {
-            InitializeHealth();
             Debug.Log("Look! No hands!");
         }
         if (bodyPartHealth.ContainsKey(BodyPart.RightArm) && bodyPartHealth[BodyPart.RightArm] <= 0)
         {
-            InitializeHealth();
             Debug.Log("Look! No hands!");
         }
         if (bodyPartHealth.ContainsKey(BodyPart.RightLeg) && bodyPartHealth[BodyPart.RightLeg] <= 0)
         {
-            InitializeHealth();
             Debug.Log("My leg!");
         }
+        InitializeHealth();
 
     }
 }

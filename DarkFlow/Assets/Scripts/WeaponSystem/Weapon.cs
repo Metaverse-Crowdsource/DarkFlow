@@ -19,7 +19,21 @@ public class Weapon : NetworkBehaviour // This is the Base Weapon class. We will
         RPG
     }
 
+    public enum AmmoType // Don't know how I intend to run this yet. Nothing in GDD to help me figure this out. Gonna wing it. - Sona
+    {
+        Neurotech,
+        Energy,
+        BioWeapon,
+        Biotech,
+        Radioactive,
+        Ballistic,
+        Fuel
+    }
+
+    private Dictionary<AmmoType, float> baseDamage = new Dictionary<AmmoType, float>();
+
     public WeaponType weaponType;
+    public AmmoType ammoType;
 
     [Header("Weapon Appearance")]
     [Space]
@@ -51,10 +65,11 @@ public class Weapon : NetworkBehaviour // This is the Base Weapon class. We will
     [Header("Market")]
     [Space]
     [Tooltip("If I sell it to an NPC, how much will I likely get?")]
-    public float weaponCostPizzo; // How much does this cost in the market / can it be sold to a shop for?
+    public float weaponCostQuint; // How much does this cost in the market / can it be sold to a shop for?
 
     private void Start()
     {
+        InitializeAmmo();
         if (!weaponProjectile) 
         {
             if (weaponType != Weapon.WeaponType.Knife)
@@ -68,6 +83,17 @@ public class Weapon : NetworkBehaviour // This is the Base Weapon class. We will
         }
     }
 
+    private void InitializeAmmo()
+    {
+        baseDamage[AmmoType.Neurotech] = 1.5f;
+        baseDamage[AmmoType.Energy] = 2f;
+        baseDamage[AmmoType.BioWeapon] = 30f;
+        baseDamage[AmmoType.Biotech] = 15f;
+        baseDamage[AmmoType.Radioactive] = 12f;
+        baseDamage[AmmoType.Ballistic] = 5f;
+        baseDamage[AmmoType.Fuel] = 11f;
+    }
+
     private void Update()
     {
         FireKey(); // Appearance keeps Update looking cleaner and allows references to find anything that use this key. - Sona
@@ -75,7 +101,7 @@ public class Weapon : NetworkBehaviour // This is the Base Weapon class. We will
 
     public void FireKey()
     {
-        if (Mouse.current.leftButton.wasPressedThisFrame && weaponProjectile)
+        if (Mouse.current.leftButton.wasPressedThisFrame && weaponProjectile) // Test input, will read from Input Manager later.
         {
             PreFire();
         }
@@ -91,6 +117,13 @@ public class Weapon : NetworkBehaviour // This is the Base Weapon class. We will
                 {
                     ShootWeapon(); // SHOTS FIRED!
                     ammoInWeapon--; // Minus one.
+                    if (weaponSounds.Length > 0)
+                    {
+                        int randInt = Random.Range(0, weaponSounds.Length);
+                        AudioClip weaponSound = weaponSounds[randInt];
+                        weaponAudioSource.PlayOneShot(weaponSound);
+                    }
+                    Debug.Log("Pew! Damage would have been - " + baseDamage[ammoType]); // This way I can test different damage types without worrying.
                 }
                 else
                 {
