@@ -4,7 +4,7 @@ using Unity.Netcode;
 public class bulletWeapon : NetworkBehaviour
 {
 
-    public float bulletSpeed = 10f; // This can be changed per weapon, the weapon will actually modify this speed itself.
+    [SerializeField] private bool explodeOnContact; // Does nothing right now. Primarily for grenades and rockets.
 
     void Update()
     {
@@ -21,6 +21,8 @@ public class bulletWeapon : NetworkBehaviour
             H.transform.GetComponent<limbHealth>().Damage(100f);
             H.transform.localScale = new Vector3(0, 0, 0);
         }
+
+        Destroy(this.gameObject);
 
     }
 
