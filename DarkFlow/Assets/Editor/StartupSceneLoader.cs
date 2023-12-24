@@ -18,7 +18,7 @@ public static class StartupSceneLoader
 
         if (state == PlayModeStateChange.EnteredPlayMode)
         {
-            if (EditorSceneManager.GetActiveScene().buildIndex != 0)
+            if (EditorSceneManager.GetActiveScene().buildIndex != 0 && EditorSceneManager.GetActiveScene().name !="systemTest" )
             {
                 EditorSceneManager.LoadScene(0);
             }
