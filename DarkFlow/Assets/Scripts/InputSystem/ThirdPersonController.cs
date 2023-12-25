@@ -1,12 +1,14 @@
-﻿using Cinemachine;
+﻿using Unity.Netcode;
+using Cinemachine;
 using UnityEngine;
 
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
 
-/* Note: animations are called via the controller for both the character and capsule using animator null checks
- */
+/* Note: animations are called via the controller for both 
+the character and capsule using animator null checks
+*/
 
 namespace StarterAssets
 {
@@ -14,7 +16,8 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM 
     [RequireComponent(typeof(PlayerInput))]
 #endif
-    public class ThirdPersonController : MonoBehaviour
+    //public class ThirdPersonController : MonoBehaviour
+    public class ThirdPersonController : NetworkBehaviour
     {
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
@@ -142,16 +145,17 @@ namespace StarterAssets
 
 
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
-            
+
             _hasAnimator = TryGetComponent(out _animator);
 
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
-#if ENABLE_INPUT_SYSTEM 
-            _playerInput = GetComponent<PlayerInput>();
-#else
-			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
-#endif
+            //#if ENABLE_INPUT_SYSTEM 
+            //_playerInput = GetComponent<PlayerInput>();
+            //#else
+            //Debug.LogError( "Starter Assets package is missing dependencies.
+            // Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
+            //#endif
 
             AssignAnimationIDs();
 
@@ -160,12 +164,27 @@ namespace StarterAssets
             _fallTimeoutDelta = FallTimeout;
         }
 
+        public override void OnNetworkSpawn()
+        {
+            base.OnNetworkSpawn();
+
+            if (IsClient && IsOwner)
+            {
+                _playerInput = GetComponent<PlayerInput>();
+                _playerInput.enabled = true;
+            }
+        }
+
         private void Update()
         {
+
+            if (!IsOwner) { return; }
+
             _hasAnimator = TryGetComponent(out _animator);
             JumpAndGravity();
             GroundedCheck();
             Move();
+
         }
 
         private void LateUpdate()
