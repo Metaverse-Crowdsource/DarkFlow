@@ -110,9 +110,10 @@ namespace StarterAssets
         private CharacterController _controller;
         private StarterAssetsInputs _input;
 
-        //private GameObject _mainCamera;
-        public Camera _mainCamera;
+        public GameObject _mainCamera;
+
         public CinemachineVirtualCamera _cinemachineVirtualCamera;
+
         private const float _threshold = 0.01f;
         private bool _hasAnimator;
 
@@ -128,61 +129,62 @@ namespace StarterAssets
             }
         }
 
+
         private void Awake()
         {
-            // get a reference to our main camera
-            //if (_mainCamera == null)
-            //{
-            //_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-            //}
-
-            //if (IsOwner)
-            //{
-            //_cinemachineVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
-            //}
-
-
+            //Initialize();
 
         }
+
+
+        public override void OnNetworkSpawn()
+        {
+            Debug.Log(".......... OnNetworkSpawn");
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+
+            //if (!IsClient && !IsOwner && !IsSpawned) { return; }
+            //if (!IsLocalPlayer || !IsOwner) { return; }
+            if (!IsOwner) { return; }
+            Debug.Log(".......... Initialize");
+
+            _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+            _playerInput = GetComponent<PlayerInput>();
+            _playerInput.enabled = true;
+
+            _cinemachineVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
+            _cinemachineVirtualCamera.Follow = transform.GetChild(0);
+            _cinemachineVirtualCamera.LookAt = transform.GetChild(0);
+
+        }
+
 
         private void Start()
 
         {
 
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
-            
+
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
 #if ENABLE_INPUT_SYSTEM 
             _playerInput = GetComponent<PlayerInput>();
 #else
-			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
+			Debug.LogError( "Starter Assets package is missing dependencies.");
 #endif
-
             AssignAnimationIDs();
 
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
+
+
         }
 
-        public override void OnNetworkSpawn()
-        {
-            base.OnNetworkSpawn();
-
-            if (IsClient && IsOwner)
-            {
-                //_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-                //_cinemachineVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
-
-                _playerInput = GetComponent<PlayerInput>();
-                _playerInput.enabled = true;
-
-                _cinemachineVirtualCamera.Follow = transform.GetChild(0);
-                //_cinemachineVirtualCamera.LookAt = transform.GetChild(0);
-            }
-        }
 
         private void Update()
         {
@@ -294,7 +296,7 @@ namespace StarterAssets
 
             }
 
-
+            //Debug.Log(".......... " + _targetRotation);
             Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
             // move the player

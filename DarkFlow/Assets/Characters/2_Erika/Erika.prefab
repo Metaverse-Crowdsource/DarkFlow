@@ -1302,7 +1302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 638232703
+  GlobalObjectIdHash: 3916998080
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -1422,10 +1422,8 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
-  _mainCamera: {fileID: 6818833442393802120, guid: 154519ab488f20d468de4e06396e2441,
-    type: 3}
-  _cinemachineVirtualCamera: {fileID: 368218139850001400, guid: 773b39ed367c011418f28a8bc3b8ca31,
-    type: 3}
+  _mainCamera: {fileID: 0}
+  _cinemachineVirtualCamera: {fileID: 0}
 --- !u!114 &2021050794510230391
 MonoBehaviour:
   m_ObjectHideFlags: 0

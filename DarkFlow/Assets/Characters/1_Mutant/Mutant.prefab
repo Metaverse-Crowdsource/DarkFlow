@@ -974,10 +974,8 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
-  _mainCamera: {fileID: 6818833442393802120, guid: 154519ab488f20d468de4e06396e2441,
-    type: 3}
-  _cinemachineVirtualCamera: {fileID: 368218139850001400, guid: 773b39ed367c011418f28a8bc3b8ca31,
-    type: 3}
+  _mainCamera: {fileID: 0}
+  _cinemachineVirtualCamera: {fileID: 0}
 --- !u!114 &6233464797961255142
 MonoBehaviour:
   m_ObjectHideFlags: 0
