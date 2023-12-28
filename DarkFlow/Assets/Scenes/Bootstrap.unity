@@ -515,6 +515,21 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6485963998722371857, guid: d3062ecfb0bd4bf4da5e175e5a3e2e8f,
         type: 3}
+      propertyPath: m_ProtocolType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6485963998722371857, guid: d3062ecfb0bd4bf4da5e175e5a3e2e8f,
+        type: 3}
+      propertyPath: ConnectionData.Port
+      value: 9998
+      objectReference: {fileID: 0}
+    - target: {fileID: 6485963998722371857, guid: d3062ecfb0bd4bf4da5e175e5a3e2e8f,
+        type: 3}
+      propertyPath: m_MaxPacketQueueSize
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 6485963998722371857, guid: d3062ecfb0bd4bf4da5e175e5a3e2e8f,
+        type: 3}
       propertyPath: ConnectionData.ServerListenAddress
       value: 127.0.0.1
       objectReference: {fileID: 0}
@@ -584,6 +599,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8854747452121219810, guid: 8be8c45aee6c276479f857be1ffeb2ab,
         type: 3}
+    - target: {fileID: 6485963998722371871, guid: d3062ecfb0bd4bf4da5e175e5a3e2e8f,
+        type: 3}
+      propertyPath: NetworkConfig.OldPrefabList.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6485963998722371871, guid: d3062ecfb0bd4bf4da5e175e5a3e2e8f,
+        type: 3}
+      propertyPath: NetworkConfig.Prefabs.NetworkPrefabsLists.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6485963998722371871, guid: d3062ecfb0bd4bf4da5e175e5a3e2e8f,
+        type: 3}
+      propertyPath: NetworkConfig.Prefabs.NetworkPrefabsLists.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: a1b89840132a9a74698ff1f0d721f9e2,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -813,6 +813,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8027232384722410602}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a65433442e687234ab8043c546677d72,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8825393132258296762}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a65433442e687234ab8043c546677d72,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5652289010296803950}
   m_SourcePrefab: {fileID: 100100000, guid: a65433442e687234ab8043c546677d72, type: 3}
 --- !u!4 &1469482750486030645 stripped
 Transform:
@@ -884,7 +892,7 @@ CharacterController:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Height: 1.47
   m_Radius: 0.35
@@ -947,7 +955,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2247144937675617167}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 08144b7c84957034f941f3355775a20d, type: 3}
   m_Name: 
@@ -974,8 +982,6 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
-  _mainCamera: {fileID: 0}
-  _cinemachineVirtualCamera: {fileID: 0}
 --- !u!114 &6233464797961255142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1021,7 +1027,7 @@ MonoBehaviour:
   ScaleThreshold: 0.01
   UseQuaternionSynchronization: 0
   UseQuaternionCompression: 0
-  UseHalfFloatPrecision: 0
+  UseHalfFloatPrecision: 1
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
@@ -1039,3 +1045,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TransitionStateInfoList: []
   m_Animator: {fileID: 222671947941112760}
+--- !u!114 &8825393132258296762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2247144937675617167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f05cd39e2b8b7604caee407644cd00c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isObjectPickedUp:
+    m_InternalValue: 0
+  m_LocalHeldPosition: {x: 0, y: 2.85, z: 0}
+--- !u!114 &5652289010296803950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2247144937675617167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 854c882e4139d184fbbe7fef3fa272e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ServerPlayerMove: {fileID: 8825393132258296762}
+  m_CharacterController: {fileID: 2129690468861909873}
+  m_ThirdPersonController: {fileID: 5509808468128901478}
+  m_CameraFollow: {fileID: 994559427591439665}
+  m_PlayerInput: {fileID: 3639033402812819131}

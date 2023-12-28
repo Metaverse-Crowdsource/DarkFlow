@@ -1,14 +1,10 @@
-﻿using Unity.Netcode;
-using Cinemachine;
-using UnityEngine;
-
-#if ENABLE_INPUT_SYSTEM 
+﻿using UnityEngine;
+#if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
 
-/* Note: animations are called via the controller for both 
-the character and capsule using animator null checks
-*/
+/* Note: animations are called via the controller for both the character and capsule using animator null checks
+ */
 
 namespace StarterAssets
 {
@@ -16,8 +12,7 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM 
     [RequireComponent(typeof(PlayerInput))]
 #endif
-    //public class ThirdPersonController : MonoBehaviour
-    public class ThirdPersonController : NetworkBehaviour
+    public class ThirdPersonController : MonoBehaviour
     {
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
@@ -109,19 +104,17 @@ namespace StarterAssets
         private Animator _animator;
         private CharacterController _controller;
         private StarterAssetsInputs _input;
-
-        public GameObject _mainCamera;
-
-        public CinemachineVirtualCamera _cinemachineVirtualCamera;
+        private GameObject _mainCamera;
 
         private const float _threshold = 0.01f;
+
         private bool _hasAnimator;
 
         private bool IsCurrentDeviceMouse
         {
             get
             {
-#if ENABLE_INPUT_SYSTEM
+#if ENABLE_INPUT_SYSTEM 
                 return _playerInput.currentControlScheme == "KeyboardMouse";
 #else
 				return false;
@@ -132,70 +125,40 @@ namespace StarterAssets
 
         private void Awake()
         {
-            //Initialize();
-
+            // get a reference to our main camera
+            if (_mainCamera == null)
+            {
+                _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+            }
         }
-
-
-        public override void OnNetworkSpawn()
-        {
-            Debug.Log(".......... OnNetworkSpawn");
-            Initialize();
-        }
-
-        private void Initialize()
-        {
-
-            //if (!IsClient && !IsOwner && !IsSpawned) { return; }
-            //if (!IsLocalPlayer || !IsOwner) { return; }
-            if (!IsOwner) { return; }
-            Debug.Log(".......... Initialize");
-
-            _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-            _playerInput = GetComponent<PlayerInput>();
-            _playerInput.enabled = true;
-
-            _cinemachineVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
-            _cinemachineVirtualCamera.Follow = transform.GetChild(0);
-            _cinemachineVirtualCamera.LookAt = transform.GetChild(0);
-
-        }
-
 
         private void Start()
-
         {
-
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
 
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
-#if ENABLE_INPUT_SYSTEM 
+#if ENABLE_INPUT_SYSTEM
             _playerInput = GetComponent<PlayerInput>();
 #else
-			Debug.LogError( "Starter Assets package is missing dependencies.");
+            Debug.LogError("Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
 #endif
+
             AssignAnimationIDs();
 
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
-
-
         }
-
 
         private void Update()
         {
-
-            if (!IsOwner) { return; }
-
             _hasAnimator = TryGetComponent(out _animator);
+
             JumpAndGravity();
             GroundedCheck();
             Move();
-
         }
 
         private void LateUpdate()
@@ -253,16 +216,21 @@ namespace StarterAssets
             // set target speed based on move speed, sprint speed and if sprint is pressed
             float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
 
+            // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
+
+            // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
             // if there is no input, set the target speed to 0
             if (_input.move == Vector2.zero) targetSpeed = 0.0f;
 
             // a reference to the players current horizontal velocity
             float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
+
             float speedOffset = 0.1f;
             float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
 
             // accelerate or decelerate to target speed
-            if (currentHorizontalSpeed < targetSpeed - speedOffset || currentHorizontalSpeed > targetSpeed + speedOffset)
+            if (currentHorizontalSpeed < targetSpeed - speedOffset ||
+                currentHorizontalSpeed > targetSpeed + speedOffset)
             {
                 // creates curved result rather than a linear one giving a more organic speed change
                 // note T in Lerp is clamped, so we don't need to clamp our speed
@@ -283,24 +251,25 @@ namespace StarterAssets
             // normalise input direction
             Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
 
-
+            // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
             // if there is a move input rotate player when the player is moving
             if (_input.move != Vector2.zero)
             {
-                _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg + _mainCamera.transform.eulerAngles.y;
-
-                float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity, RotationSmoothTime);
+                _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
+                                  _mainCamera.transform.eulerAngles.y;
+                float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
+                    RotationSmoothTime);
 
                 // rotate to face input direction relative to camera position
                 transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
-
             }
 
-            //Debug.Log(".......... " + _targetRotation);
+
             Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
             // move the player
-            _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+            _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
+                             new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 
             // update animator if using character
             if (_hasAnimator)
@@ -407,7 +376,9 @@ namespace StarterAssets
                 if (FootstepAudioClips.Length > 0)
                 {
                     var index = Random.Range(0, FootstepAudioClips.Length);
-                    AudioSource.PlayClipAtPoint(FootstepAudioClips[index], transform.TransformPoint(_controller.center), FootstepAudioVolume);
+                    // MTT CHANGE START (for simplicity's sake, playing at the transform's position suffices)
+                    AudioSource.PlayClipAtPoint(FootstepAudioClips[index], transform.position, FootstepAudioVolume);
+                    // MTT CHANGE END
                 }
             }
         }
@@ -416,7 +387,9 @@ namespace StarterAssets
         {
             if (animationEvent.animatorClipInfo.weight > 0.5f)
             {
-                AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
+                // MTT CHANGE START (for simplicity's sake, playing at the transform's position suffices)
+                AudioSource.PlayClipAtPoint(LandingAudioClip, transform.position, FootstepAudioVolume);
+                // MTT CHANGE END
             }
         }
     }
