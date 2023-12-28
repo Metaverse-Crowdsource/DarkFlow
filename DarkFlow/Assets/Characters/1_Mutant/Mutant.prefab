@@ -816,10 +816,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a65433442e687234ab8043c546677d72,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8825393132258296762}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a65433442e687234ab8043c546677d72,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 5652289010296803950}
   m_SourcePrefab: {fileID: 100100000, guid: a65433442e687234ab8043c546677d72, type: 3}
 --- !u!4 &1469482750486030645 stripped
@@ -913,7 +909,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 4419d82f33d36e848b3ed5af4c8da37e,
+  m_Actions: {fileID: -944628639613478452, guid: 42bbd845906c9dd4fa77e979ee644342,
     type: 3}
   m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
@@ -1045,21 +1041,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TransitionStateInfoList: []
   m_Animator: {fileID: 222671947941112760}
---- !u!114 &8825393132258296762
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2247144937675617167}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f05cd39e2b8b7604caee407644cd00c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isObjectPickedUp:
-    m_InternalValue: 0
-  m_LocalHeldPosition: {x: 0, y: 2.85, z: 0}
 --- !u!114 &5652289010296803950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1072,7 +1053,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 854c882e4139d184fbbe7fef3fa272e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ServerPlayerMove: {fileID: 8825393132258296762}
   m_CharacterController: {fileID: 2129690468861909873}
   m_ThirdPersonController: {fileID: 5509808468128901478}
   m_CameraFollow: {fileID: 994559427591439665}

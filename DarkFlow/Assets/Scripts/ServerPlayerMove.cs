@@ -7,25 +7,13 @@ using UnityEngine;
 [DefaultExecutionOrder(0)] // before client component
 public class ServerPlayerMove : NetworkBehaviour
 {
-    public NetworkVariable<bool> isObjectPickedUp = new NetworkVariable<bool>();
-    
-    NetworkObject m_PickedUpObject;
-
-    [SerializeField]
-    Vector3 m_LocalHeldPosition;
-
 
     public override void OnNetworkSpawn()
     {
-        if (!IsServer)
-        {
-            enabled = false;
-            return;
-        }
+        if (!IsServer) { return; }
 
-        OnServerSpawnPlayer();
-        
-        base.OnNetworkSpawn();
+        //OnServerSpawnPlayer();
+
     }
 
     void OnServerSpawnPlayer()
@@ -33,8 +21,9 @@ public class ServerPlayerMove : NetworkBehaviour
         // this is done server side, so we have a single source of truth for our spawn point list
         var spawnPoint = ServerPlayerSpawnPoints.Instance.ConsumeNextSpawnPoint();
         var spawnPosition = spawnPoint ? spawnPoint.transform.position : Vector3.zero;
-        transform.position = spawnPosition;
-        
+        this.transform.position = spawnPosition;
+        //Debug.Log(".......... Server");
+
         // A note specific to owner authority:
         // Side Note:  Specific to Owner Authoritative
         // Setting the position works as and can be set in OnNetworkSpawn server-side unless there is a
@@ -45,11 +34,4 @@ public class ServerPlayerMove : NetworkBehaviour
         // transform after synchronization with the initial position, thus overwriting the synchronized position.
     }
 
-    
-
-
-
-    
-
-  
 }
