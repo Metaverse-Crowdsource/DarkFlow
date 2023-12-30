@@ -47,7 +47,7 @@ public class Health: NetworkBehaviour
         Debug.Log("Health behavior on " + this.gameObject + " has been activated."); // I just like knowing the script is functioning.
     }
 
-    private void InitializeHealth() // Bodypart floats are counted as a 1-100 float value. They can be increased, but it will need to be handled outside the script for cleanliness.
+    public void InitializeHealth() // Bodypart floats are counted as a 1-100 float value. They can be increased, but it will need to be handled outside the script for cleanliness.
     {
 //        if (!isLocalPlayer) return;
 
@@ -59,7 +59,7 @@ public class Health: NetworkBehaviour
         bodyPartHealth[BodyPart.RightLeg] = 100f;
     }
 
-    private void InitializeToxicBar() // Load the meters up and zero them out, we'll get the values later from the server.
+    public void InitializeToxicBar() // Load the meters up and zero them out, we'll get the values later from the server.
     {
  //       if (!isLocalPlayer) return;
 
@@ -68,7 +68,7 @@ public class Health: NetworkBehaviour
         toxicBar[Toxicity.Radiation] = 0f;
     }
 
-    private void DamageArmor(float D) // Private so that this function must be special called by a referencing script. I'll network this soon to test for lag.
+    public void DamageArmor(float D) // Private so that this function must be special called by a referencing script. I'll network this soon to test for lag.
     {
         if (D <= 0) return;
         else

@@ -1,53 +1,66 @@
-using StarterAssets;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
-[RequireComponent(typeof(PlayerInput))]
-
 public class CharacterMain : MonoBehaviour
 {
-    private CharacterController characterController;
     private bool isJumping;
     private bool isWalking;
     public float movementSpeed = 5f;
     private Vector2 moveInput;
 
-    private void Awake()
+
+
+
+    [SerializeField] private string charName; // GameObject will NOT be player's name - this will.
+    [SerializeField] private Health health; // Useless for now.
+
+    private void Start()
     {
-        characterController = GetComponent<CharacterController>();
+        
     }
 
     private void Update()
     {
-        HandleMovement();
+        //OnMove;
+        transform.Translate(new Vector3(moveInput.x, 0, moveInput.y) * movementSpeed * Time.deltaTime);
+
     }
-    private void Movement(InputAction.CallbackContext context)
+
+    private void OnMove(InputValue value)
     {
-        if(context.started)
+
+        moveInput = value.Get<Vector2>();
+        /*
+
+
+        private void Update()
         {
-            moveInput = context.ReadValue<Vector2>();
+            HandleMovement();
+            Move();
         }
-        else if (context.canceled)
+
+        private void Move(InputAction context)
         {
-            // Clear the move input value when the input is released
-            moveInput = Vector2.zero;
+            if(context != null)
+            {
+                moveInput = context.ReadValue<Vector2>();
+            }
+
         }
 
+        private void HandleMovement()
+        {
+            // Calculate movement direction based on input
+            Vector3 moveDirection = new Vector3(moveInput.x, 0f, moveInput.y).normalized;
+
+            // Check if the player is walking
+            isWalking = moveDirection.magnitude > 0;
+
+            // Move the character using the CharacterController
+            characterController.Move(moveDirection * movementSpeed * Time.deltaTime);
+
+        }
+
+        */
     }
-
-    private void HandleMovement()
-    {
-        // Calculate movement direction based on input
-        Vector3 moveDirection = new Vector3(moveInput.x, 0f, moveInput.y).normalized;
-
-        // Check if the player is walking
-        isWalking = moveDirection.magnitude > 0;
-
-        // Move the character using the CharacterController
-        characterController.Move(moveDirection * movementSpeed * Time.deltaTime);
-
-    }
-
-
 }
