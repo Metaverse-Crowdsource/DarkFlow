@@ -541,11 +541,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6485963998722371857, guid: d3062ecfb0bd4bf4da5e175e5a3e2e8f,
         type: 3}
-      propertyPath: ConnectionData.Port
-      value: 7777
-      objectReference: {fileID: 0}
-    - target: {fileID: 6485963998722371857, guid: d3062ecfb0bd4bf4da5e175e5a3e2e8f,
-        type: 3}
       propertyPath: m_MaxPacketQueueSize
       value: 256
       objectReference: {fileID: 0}

@@ -13,11 +13,13 @@ public static class StartupSceneLoader
     {
 
 #if UNITY_EDITOR
-        if (ParrelSync.ClonesManager.IsClone())
+
+
+        if (ClonesManager.IsClone())
         {
             string customArgument = ParrelSync.ClonesManager.GetArgument();
             AuthenticationService.Instance.SwitchProfile($"Clone_{customArgument}_Profile");
-            //Debug.Log("_______" + AuthenticationService.Instance.GetPlayerNameAsync());
+            Debug.Log("_______" + AuthenticationService.Instance.GetPlayerNameAsync());
         }
 #endif
 
