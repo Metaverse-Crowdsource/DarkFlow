@@ -1,13 +1,15 @@
 using System;
 using Cinemachine;
 using StarterAssets;
+using Unity.Jobs;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// Assumes client authority
-[DefaultExecutionOrder(1)] // after server component
+//[DefaultExecutionOrder(1)] // after server component
 public class ClientPlayerSetings : NetworkBehaviour
+//public class ClientPlayerSetings : MonoBehaviour
 {
 
     [SerializeField]
@@ -16,15 +18,27 @@ public class ClientPlayerSetings : NetworkBehaviour
     [SerializeField]
     ThirdPersonController m_ThirdPersonController;
 
+
     [SerializeField]
     Transform m_CameraFollow;
 
     [SerializeField]
     PlayerInput m_PlayerInput;
 
+
+
     public override void OnNetworkSpawn()
     {
-        Debug.Log(".......... ClientPlayerSeting1");
+
+        m_ThirdPersonController.enabled = false;
+
+        Invoke("Initialize", .5f);
+
+    }
+
+    void Initialize()
+    {
+        Debug.Log(".......... ClientPlayerSeting 1");
         if (!IsOwner) { return; }
 
         // player input is only enabled on owning players
@@ -32,11 +46,15 @@ public class ClientPlayerSetings : NetworkBehaviour
         m_ThirdPersonController.enabled = true;
         m_CharacterController.enabled = true;
 
+        GetComponent<ThirdPersonController>()._mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+
         //var cinemachineVirtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
         //cinemachineVirtualCamera.Follow = m_CameraFollow;
         FindObjectOfType<CinemachineVirtualCamera>().Follow = m_CameraFollow;
-        Debug.Log(".......... ClientPlayerSeting2");
+        Debug.Log(".......... ClientPlayerSeting 2");
     }
+
+
 
 
 }

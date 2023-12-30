@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-[DefaultExecutionOrder(0)] // before client component
+//[DefaultExecutionOrder(0)] // before client component
 public class CharacterSpawner : NetworkBehaviour
 {
     [Header("References")]
