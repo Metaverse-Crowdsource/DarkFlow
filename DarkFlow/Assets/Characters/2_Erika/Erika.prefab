@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2034699475712123807}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.088634305, y: 0.8976513, z: 0.21136884, w: 0.37641641}
+  m_LocalRotation: {x: -0.07656788, y: 0.91476274, z: 0.2069897, w: 0.3383813}
   m_LocalPosition: {x: 0, y: 1.44, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -1306,7 +1306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 638232703
+  GlobalObjectIdHash: 3916998080
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -1426,6 +1426,7 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
+  _mainCamera: {fileID: 0}
 --- !u!114 &2021050794510230391
 MonoBehaviour:
   m_ObjectHideFlags: 0
