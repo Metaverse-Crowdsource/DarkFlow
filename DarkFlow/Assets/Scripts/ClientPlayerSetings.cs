@@ -28,7 +28,7 @@ public class ClientPlayerSetings : NetworkBehaviour
     void Initialize()
     //void Update()
     {
-        Debug.Log(".......... ClientPlayerSeting 1");
+        //Debug.Log(".......... ClientPlayerSeting 1");
         if (!IsOwner) { return; }
         // player input is only enabled on owning players
         m_PlayerInput.enabled = true;
@@ -36,12 +36,9 @@ public class ClientPlayerSetings : NetworkBehaviour
         m_CharacterController.enabled = true;
         GetComponent<ThirdPersonController>()._mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         FindObjectOfType<CinemachineVirtualCamera>().Follow = m_CameraFollow;
-        if (IsSpawned) { return; }
-        Debug.Log(".......... ClientPlayerSeting 2");
+        //if (IsSpawned) { return; }
+        //Debug.Log(".......... ClientPlayerSeting 2");
 
     }
-
-
-
 
 }
