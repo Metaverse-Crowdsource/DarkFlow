@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
+
 public class CharacterMain : MonoBehaviour
 {
     private bool isJumping;
@@ -16,7 +18,7 @@ public class CharacterMain : MonoBehaviour
 
     private void Start()
     {
-        
+
     }
 
     private void Update()
