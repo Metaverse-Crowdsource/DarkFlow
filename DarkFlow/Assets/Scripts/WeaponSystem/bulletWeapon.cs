@@ -3,27 +3,33 @@ using Unity.Netcode;
 
 public class bulletWeapon : NetworkBehaviour
 {
-
-    [SerializeField] private bool explodeOnContact; // Does nothing right now. Primarily for grenades and rockets.
+    [SerializeField] private bool explodeOnContact; // Placeholder for future use.
 
     void Update()
     {
- //       if(isServer)
- //       {
- //           transform.Translate(Vector3.forward * bulletSpeed * Time.deltaTime); // Probably do this as a Rigidbody later for bullet drop. Maybe not.
- //       }
+        // Bullet movement logic (if needed)
     }
 
-    void OnCollisionEnter(Collision H)
+    void OnCollisionEnter(Collision collision)
     {
-        if (H.transform.tag == "PlayerLimb")
+        // Check if the collision object has a tag indicating it's a player limb
+        if (collision.transform.tag == "PlayerLimb")
         {
-            H.transform.GetComponent<limbHealth>().Damage(100f);
-            H.transform.localScale = new Vector3(0, 0, 0);
+            // Retrieve the BodyPartDamage component from the limb
+            BodyPartDamage bodyPartDamage = collision.transform.GetComponent<BodyPartDamage>();
+
+            // Check if the limb has the BodyPartDamage component
+            if (bodyPartDamage != null)
+            {
+                // Apply damage to the limb
+                bodyPartDamage.TakeDamage(collision.transform.name, 100f); // Replace 100f with the desired damage amount
+
+                // Optional: Apply any other effects
+                // Example: collision.transform.localScale = new Vector3(0, 0, 0);
+            }
         }
 
-        Destroy(this.gameObject);
-
+        // Destroy the bullet object upon collision
+        Destroy(gameObject);
     }
-
 }
