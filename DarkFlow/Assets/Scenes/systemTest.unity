@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -411,17 +411,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 518869412}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa1cd3d59b877b84aa6a7258c317c615, type: 3}
+  m_Script: {fileID: 11500000, guid: 5ac29fa319c8230458f11f733c334933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   npcName: Billy NPC
   desc: A guy who just AIs for fun.
   isHostile: 0
   NPCText: Hey there. I bet you didn't think I could talk yet!
+  dropOnDeath: {fileID: 0}
   audioSource: {fileID: 0}
-  health: {fileID: 518869414}
-  npcNameBox: {fileID: 1860595803}
-  npcChatBox: {fileID: 1324247241}
+  health: {fileID: 0}
+  npcNameBox: {fileID: 0}
+  npcChatBox: {fileID: 0}
 --- !u!136 &518869416
 CapsuleCollider:
   m_ObjectHideFlags: 0
