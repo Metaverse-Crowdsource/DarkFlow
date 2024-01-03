@@ -6,7 +6,7 @@ public class AdrenalineTrigger : MonoBehaviour
     private float adrenalineLevel = 0f;
     public float adrenalineTriggerThreshold = 20f; // Threshold for adrenaline boost
     public Image adrenalineBar;
-    HealthRegeneration healthScript;
+    private HealthRegeneration healthScript;
 
     private void Start()
     {
@@ -15,7 +15,7 @@ public class AdrenalineTrigger : MonoBehaviour
 
     private void Update()
     {
-        if (healthScript.currentHealth <= adrenalineTriggerThreshold && adrenalineLevel < 100f)
+        if (healthScript.GetCurrentHealth() <= adrenalineTriggerThreshold && adrenalineLevel < 100f)
         {
             adrenalineLevel += Time.deltaTime * 50f; // Increase adrenaline
             UpdateAdrenalineBar();
@@ -29,7 +29,7 @@ public class AdrenalineTrigger : MonoBehaviour
 
     private void UpdateAdrenalineBar()
     {
-        if(adrenalineBar != null)
+        if (adrenalineBar != null)
         {
             adrenalineBar.fillAmount = adrenalineLevel / 100f;
         }

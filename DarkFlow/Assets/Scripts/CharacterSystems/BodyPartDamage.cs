@@ -8,7 +8,7 @@ public class BodyPartDamage : MonoBehaviour
     {
         public string name;
         public float health;
-        public Image silhouetteImage; // Assign UI Image for each body part
+        public Image bodyPartImage; // Assign UI Image for each body part
     }
 
     public BodyPart[] bodyParts;
@@ -40,29 +40,31 @@ public class BodyPartDamage : MonoBehaviour
 
     private void UpdateBodyPartUI(BodyPart part)
     {
-        Color color = Color.green;
-        if (part.health < maxHealth * 0.3f)
+        if (part.health <= 0)
         {
-            color = Color.red; // Severe damage
+            part.bodyPartImage.color = Color.black; // Complete damage
+        }
+        else if (part.health < maxHealth * 0.3f)
+        {
+            part.bodyPartImage.color = Color.red; // Critical damage
         }
         else if (part.health < maxHealth * 0.6f)
         {
-            color = new Color(1, 0.5f, 0); // Orange for moderate damage
+            part.bodyPartImage.color = new Color(1, 0.5f, 0); // Worse damage (orange)
         }
-
-        part.silhouetteImage.color = color;
+        else if (part.health < maxHealth)
+        {
+            part.bodyPartImage.color = Color.yellow; // Moderate damage
+        }
+        else
+        {
+            part.bodyPartImage.color = Color.green; // No damage
+        }
     }
 
     private void ApplyEffectBasedOnDamage(BodyPart part)
     {
-        if (part.name == "Leg" && part.health < maxHealth * 0.5f)
-        {
-            // Implement logic for limping
-        }
-        else if (part.name == "Arm" && part.health < maxHealth * 0.5f)
-        {
-            // Implement logic for reduced accuracy
-        }
-        // Add more conditions for other body parts and their specific effects
+        // Here you can implement the effect each type of damage has on the player
+        // For example, if a leg is damaged, you might reduce the player's speed
     }
 }
