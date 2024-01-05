@@ -9,7 +9,7 @@ namespace DarkFlow.Editor
     {
         static StartupSceneLoader()
         {
-            EditorApplication.playModeStateChanged += LoadStartupScene;
+            //EditorApplication.playModeStateChanged += LoadStartupScene;
         }
 
         static void LoadStartupScene(PlayModeStateChange state)
