@@ -1,3 +1,5 @@
+using UnityEngine;
+
 [CreateAssetMenu(fileName = "QuestObjectiveTracker", menuName = "Stats/QuestObjectiveTracker")]
 public class QuestObjectiveTracker : StatBase
 {

@@ -1,3 +1,5 @@
+using UnityEngine;
+
 [CreateAssetMenu(fileName = "WildLifeTracker", menuName = "Stats/WildLifeTracker")]
 public class WildLifeTracker : StatBase
 {

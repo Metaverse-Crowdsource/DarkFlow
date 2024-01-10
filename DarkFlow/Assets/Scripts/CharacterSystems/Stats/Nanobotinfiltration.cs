@@ -1,3 +1,5 @@
+using UnityEngine;
+
 [CreateAssetMenu(fileName = "NanobotInfiltration", menuName = "Stats/NanobotInfiltration")]
 public class NanobotInfiltration : StatBase
 {
