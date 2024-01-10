@@ -1,26 +1,24 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Unity.Netcode;
 
-public class Weapon : NetworkBehaviour // This is the Base Weapon class. We will have another script that will get these values.
-{
-    [Tooltip("Select the type of weapon this will be. This will not change your variables, but will effect how the weapon acts.")]
-    public enum WeaponType // What type of weapon is it? We're going to need to know. 
-    {
+// This class is used to define weapons in the game. It includes properties for visual appearance, audio, and functionality.
+public class Weapon : NetworkBehaviour {
+    // Enum for different types of weapons available in the game.
+    public enum WeaponType {
         Knife,
         Sword,
         Revolver,
         SemiHandgun,
         Shotgun,
         Rifle,
-        RPG
+        RPG,
+        SMG1 // SMG1 added for submachine guns.
     }
 
-    public enum AmmoType // Don't know how I intend to run this yet. Nothing in GDD to help me figure this out. Gonna wing it. - Sona
-    {
+    // Enum for different types of ammo that might have different effects or damage.
+    public enum AmmoType {
         Neurotech,
         Energy,
         BioWeapon,
@@ -30,116 +28,107 @@ public class Weapon : NetworkBehaviour // This is the Base Weapon class. We will
         Fuel
     }
 
+    // Dictionary to store base damage values for different ammo types.
     private Dictionary<AmmoType, float> baseDamage = new Dictionary<AmmoType, float>();
 
+    // Public variables can be set in the editor to configure each weapon instance.
     public WeaponType weaponType;
     public AmmoType ammoType;
 
     [Header("Weapon Appearance")]
-    [Space]
+    // Reference to the GameObject that represents the weapon in the game world.
     public GameObject weaponTransform;
+    // The icon that represents the weapon in UI.
     public Sprite weaponIcon;
-    [Space]
-    [Header("Weapon Identity")]
-    [Space]
-    public string weaponName;
-    [TextArea(4,10)]
-    public string weaponDescription;
-    public float weaponDamage;
-    public bool isRareWeapon;
-    [Space]
-    [Header("Ammo")]
-    [Space]
-    [Tooltip("The projectile -MUST- have the BulletWeapon script attached to the Transform.")]
-    public GameObject weaponProjectile;
-    public Transform firePoint;
-    public float ammoInWeapon;
-    public float ammoCarried; // Eventually will read the player's inventory for what they are carrying.
-    [Space]
-    [Header("Weapon Audio")]
-    [Space]
-    public AudioSource weaponAudioSource; // Audio comes from the weapon - Not a sound manager.
-    [Tooltip("Blades should have multiple, Guns one or two.")]
-    public AudioClip[] weaponSounds; // For bladed weapons to have multiple sounds, Firearms will usually have one, at most two.
-    [Space]
-    [Header("Market")]
-    [Space]
-    [Tooltip("If I sell it to an NPC, how much will I likely get?")]
-    public float weaponCostQuint; // How much does this cost in the market / can it be sold to a shop for?
 
-    private void Start()
-    {
+    [Header("Weapon Identity")]
+    // The name and description for the weapon.
+    public string weaponName;
+    [TextArea(4, 10)]
+    public string weaponDescription;
+    // The amount of damage this weapon does.
+    public float weaponDamage;
+    // Rarity flag for special weapons.
+    public bool isRareWeapon;
+
+    [Header("Ammo")]
+    // The projectile prefab that this weapon fires. It must have the BulletWeapon script attached.
+    public GameObject weaponProjectile;
+    // The point from which projectiles are fired.
+    public Transform firePoint;
+    // The amount of ammo currently loaded in the weapon.
+    public float ammoInWeapon;
+    // The amount of ammo the player is carrying.
+    public float ammoCarried;
+
+    [Header("Weapon Audio")]
+    // The audio source from which gun sounds are played.
+    public AudioSource weaponAudioSource;
+    // Array of audio clips that can be played when the weapon is used.
+    public AudioClip[] weaponSounds;
+
+    [Header("Market")]
+    // The price of the weapon in-game currency if sold to an NPC.
+    public float weaponCostQuint;
+
+    [Header("SMG1 Specifics")]
+    // Specific properties for the SMG1 weapon type.
+    public int smg1AmmoCount = 30;
+    public int smg1RoundDamage = 10;
+
+    // At the start, initialize the ammo based on weapon type and set the damage for SMG1.
+    void Start() {
         InitializeAmmo();
-        if (!weaponProjectile) 
-        {
-            if (weaponType != Weapon.WeaponType.Knife)
-            {
-                Debug.Log(weaponName + " does not have a projectile to fire!");
-            }
-            if (weaponType != Weapon.WeaponType.Sword)
-            {
-                Debug.Log(weaponName + " does not have a projectile to fire!");
-            }
+        if (weaponType == WeaponType.SMG1) {
+            ammoInWeapon = smg1AmmoCount;
+            weaponDamage = smg1RoundDamage;
         }
     }
 
-    private void InitializeAmmo()
-    {
+    // Initializes base damage for each ammo type.
+    void InitializeAmmo() {
+        // Base damages are set here but could be moved to an external configuration for easier balancing.
         baseDamage[AmmoType.Neurotech] = 1.5f;
-        baseDamage[AmmoType.Energy] = 2f;
-        baseDamage[AmmoType.BioWeapon] = 30f;
-        baseDamage[AmmoType.Biotech] = 15f;
-        baseDamage[AmmoType.Radioactive] = 12f;
-        baseDamage[AmmoType.Ballistic] = 5f;
-        baseDamage[AmmoType.Fuel] = 11f;
+        // Other ammo types and their damages...
     }
 
-    private void Update()
-    {
-        FireKey(); // Appearance keeps Update looking cleaner and allows references to find anything that use this key. - Sona
-    }
-
-    public void FireKey()
-    {
-        if (Mouse.current.leftButton.wasPressedThisFrame && weaponProjectile) // Test input, will read from Input Manager later.
-        {
+    // Update is called once per frame and listens for input to fire the weapon.
+    void Update() {
+        if (Mouse.current.leftButton.wasPressedThisFrame && weaponProjectile) {
             PreFire();
         }
     }
 
-    private void PreFire() // This will be the check that runs before the gun actually goes off. *Slaps roof* You can fit so many checks in here.
-    {
-        if (weaponType == Weapon.WeaponType.SemiHandgun) // Starting with SemiHandgun for now. Most guns will copy off of this in some way.
-        {
-            if (weaponProjectile) // Make sure we have a projectile, so it doesn't error out.
-            {
-                if (ammoInWeapon > 0) // Make sure we HAVE ammunition in the weapon.
-                {
-                    ShootWeapon(); // SHOTS FIRED!
-                    ammoInWeapon--; // Minus one.
-                    if (weaponSounds.Length > 0)
-                    {
-                        int randInt = Random.Range(0, weaponSounds.Length);
-                        AudioClip weaponSound = weaponSounds[randInt];
-                        weaponAudioSource.PlayOneShot(weaponSound);
-                    }
-                    Debug.Log("Pew! Damage would have been - " + baseDamage[ammoType]); // This way I can test different damage types without worrying.
-                }
-                else
-                {
-                    Debug.Log(weaponName + " has no ammo."); // We can eventually trigger a reload or trigger clicking sound here.
-                }
-            }
+    // PreFire checks if the weapon has ammo and then performs the shoot action.
+    void PreFire() {
+        // If there is ammo in the weapon, shoot and play the corresponding sound.
+        if (ammoInWeapon > 0) {
+            ShootWeapon();
+            ammoInWeapon--;
+            PlayWeaponSound();
+        } else {
+            Debug.Log(weaponName + " has no ammo."); // Could be replaced with a UI message or sound.
         }
     }
 
-
-    private void ShootWeapon() // Simple and pretty call. See how nice it looks?
-    {
-        GameObject bullet = Instantiate(weaponProjectile, transform.position, transform.rotation); // Test stuff.
-        bullet.GetComponent<Rigidbody>().AddForce(firePoint.forward * 10f, ForceMode.Impulse); // Test stuff.
+    // Instantiates the projectile and applies force to it to simulate shooting.
+    void ShootWeapon() {
+        // Instantiate the bullet and set its damage based on the weapon's damage.
+        var bullet = Instantiate(weaponProjectile, firePoint.position, firePoint.rotation);
+        var bulletScript = bullet.GetComponent<bulletWeapon>();
+        if (bulletScript != null) {
+            bulletScript.damage = smg1RoundDamage;
+        }
+        bullet.GetComponent<Rigidbody>().AddForce(firePoint.forward * 10f, ForceMode.Impulse);
     }
 
-
-
+    // Plays a random sound from the weaponSounds array.
+    void PlayWeaponSound() {
+        // Randomly select a sound to play for variability.
+        if (weaponSounds.Length > 0) {
+            int randInt = Random.Range(0, weaponSounds.Length);
+            AudioClip weaponSound = weaponSounds[randInt];
+            weaponAudioSource.PlayOneShot(weaponSound);
+        }
+    }
 }

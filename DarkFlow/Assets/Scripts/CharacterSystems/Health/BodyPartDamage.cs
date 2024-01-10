@@ -16,8 +16,27 @@ public class BodyPartDamage : MonoBehaviour
 
     void Start()
     {
+        // Check if the bodyParts array itself is not null
+        if (bodyParts == null)
+        {
+            Debug.LogError("BodyParts array is not initialized!");
+            return;
+        }
+
         foreach (var part in bodyParts)
         {
+            if (part == null)
+            {
+                Debug.LogError("One of the body parts is null.");
+                continue;
+            }
+
+            if (part.bodyPartImage == null)
+            {
+                Debug.LogError("BodyPartImage is not set for " + part.name);
+                continue;
+            }
+
             part.health = maxHealth;
             UpdateBodyPartUI(part);
         }
@@ -40,6 +59,13 @@ public class BodyPartDamage : MonoBehaviour
 
     private void UpdateBodyPartUI(BodyPart part)
     {
+        // Additional null check for safety
+        if (part == null || part.bodyPartImage == null)
+        {
+            Debug.LogError("Part or BodyPartImage is null for updating UI.");
+            return;
+        }
+
         if (part.health <= 0)
         {
             part.bodyPartImage.color = Color.black; // Complete damage
