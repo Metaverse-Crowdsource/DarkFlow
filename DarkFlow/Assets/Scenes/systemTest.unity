@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -628,7 +628,6 @@ GameObject:
   - component: {fileID: 518869417}
   - component: {fileID: 518869416}
   - component: {fileID: 518869415}
-  - component: {fileID: 518869413}
   - component: {fileID: 518869414}
   - component: {fileID: 518869420}
   m_Layer: 0
@@ -638,26 +637,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &518869413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 518869412}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2367159778
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!114 &518869414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1316,6 +1295,8 @@ MonoBehaviour:
   weaponAudioSource: {fileID: 1918339079}
   weaponSounds: []
   weaponCostQuint: 0
+  smg1AmmoCount: 30
+  smg1RoundDamage: 10
 --- !u!65 &1029546733
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2116,6 +2097,8 @@ MonoBehaviour:
   weaponAudioSource: {fileID: 1490458851}
   weaponSounds: []
   weaponCostQuint: 0
+  smg1AmmoCount: 30
+  smg1RoundDamage: 10
 --- !u!114 &1448541920
 MonoBehaviour:
   m_ObjectHideFlags: 0

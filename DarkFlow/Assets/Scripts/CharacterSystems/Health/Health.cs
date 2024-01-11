@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Unity.Netcode;
 
-public class Health: NetworkBehaviour
+
+public class Health : MonoBehaviour
 {
     // ***Network Checks*** All network calls and references are made in the Limb script and anything calling to this Class. This prevents unneccessary checks on our part.
 
@@ -49,7 +49,7 @@ public class Health: NetworkBehaviour
 
     public void InitializeHealth() // Bodypart floats are counted as a 1-100 float value. They can be increased, but it will need to be handled outside the script for cleanliness.
     {
-//        if (!isLocalPlayer) return;
+        //        if (!isLocalPlayer) return;
 
         bodyPartHealth[BodyPart.Head] = 100f;
         bodyPartHealth[BodyPart.Chest] = 100f;
@@ -61,7 +61,7 @@ public class Health: NetworkBehaviour
 
     public void InitializeToxicBar() // Load the meters up and zero them out, we'll get the values later from the server.
     {
- //       if (!isLocalPlayer) return;
+        //       if (!isLocalPlayer) return;
 
         toxicBar[Toxicity.Bio] = 0f;
         toxicBar[Toxicity.Psych] = 0f;
@@ -74,7 +74,7 @@ public class Health: NetworkBehaviour
         else
         {
             armorHealth -= D;
-            if(armorHealth <= 0)
+            if (armorHealth <= 0)
             {
                 armorHealth = 0;
                 Debug.Log("Armor on " + this.gameObject + " has been destroyed beyond repair!");
@@ -84,9 +84,9 @@ public class Health: NetworkBehaviour
 
     public void DamagePlayer(float D, BodyPart bodyPart) // D to call for the damage float, X will probably reference a body part in the future.
     {
-        if(bodyPartHealth.ContainsKey(bodyPart))
+        if (bodyPartHealth.ContainsKey(bodyPart))
         {
-            if(D > 0)
+            if (D > 0)
             {
                 bodyPartHealth[bodyPart] -= D;
                 healthMain -= D / bodyPartHealth[bodyPart] * 2;

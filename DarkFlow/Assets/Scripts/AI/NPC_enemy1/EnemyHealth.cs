@@ -1,11 +1,14 @@
 using UnityEngine;
 
 // Create a ScriptableObject that represents the health of an enemy.
-[CreateAssetMenu(fileName = "EnemyHealth", menuName = "ScriptableObjects/EnemyHealth", order = 1)]
+[CreateAssetMenu(fileName = "EnemyHealth", menuName = "Health/EnemyHealth", order = 1)]
 public class EnemyHealth : ScriptableObject
 {
     public int maxHealth = 5; // Health points, as per our requirement
     public int currentHealth;
+    public GameObject Prefab;
+
+    //public GameObject IntroPrefab => Prefab;
 
     // Call this method to initialize the health when you spawn the enemy.
     public void OnEnable()
@@ -16,7 +19,7 @@ public class EnemyHealth : ScriptableObject
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        
+
         if (currentHealth <= 0)
         {
             Die();
