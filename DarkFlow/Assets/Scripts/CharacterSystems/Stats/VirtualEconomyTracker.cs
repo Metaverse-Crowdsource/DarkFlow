@@ -1,7 +1,15 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "VirtualEconomyTracker", menuName = "Stats/VirtualEconomyTracker")]
-public class VirtualEconomyTracker : StatBase
+public class EconomyTracker : MonoBehaviour
 {
-    // Additional properties specific to VirtualEconomyTracker Status
+    private float virtualCurrency;
+
+    void Update()
+    {
+        // Update currency based on player actions or market changes
+        // virtualCurrency = ...
+
+        // Update UI
+    }
 }

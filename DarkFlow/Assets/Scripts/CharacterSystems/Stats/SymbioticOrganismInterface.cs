@@ -1,7 +1,15 @@
 using UnityEngine;
-
-[CreateAssetMenu(fileName = "SymbioticOrganismInterface", menuName = "Stats/SymbioticOrganismInterface")]
-public class SymbioticOrganismInterface : StatBase
+using UnityEngine.UI;
+public class SymbioticOrganismInterface : MonoBehaviour
 {
-    // Additional properties specific to SymbioticOrganismInterface Status
+    public float symbioteActivityLevel;
+
+    void Update()
+    {
+        // Update based on game logic
+        // symbioteActivityLevel = ...
+
+        // Update UI
+    }
 }
+

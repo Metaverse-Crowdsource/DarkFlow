@@ -1,7 +1,13 @@
 using UnityEngine;
+using UnityEngine.UI;
+using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "MessengerService", menuName = "Stats/MessengerService")]
-public class MessengerService : StatBase
+
+[System.Serializable]
+public class Message
 {
-    // Additional properties specific to MessengerService Status
+    public string sender;
+    public string content;
+    public bool isRead;
+    // Add other relevant stuff
 }

@@ -1,7 +1,16 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "AirQualityAnalysis", menuName = "Stats/AirQualityAnalysis")]
-public class AirQualityAnalysis : StatBase
+public class AirQualityAnalysis : MonoBehaviour
 {
-    // Additional properties specific to AirQualityAnalysis Status
+    public enum AirQuality { Good, Moderate, Unhealthy, Hazardous }
+    public AirQuality currentAirQuality;
+
+    void Update()
+    {
+        // Determine air quality based on location or events
+        // currentAirQuality = ...
+
+        // Update UI with color-coded icon
+    }
 }

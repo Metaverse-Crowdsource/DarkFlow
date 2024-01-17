@@ -1,7 +1,22 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "EnergyLevels", menuName = "Stats/EnergyLevels")]
-public class EnergyLevels : StatBase
+public class EnergyLevels : MonoBehaviour
 {
-    // Additional properties specific to Energy Levels
+    public float maxEnergy = 100f;
+    private float currentEnergy;
+
+    void Start()
+    {
+        currentEnergy = maxEnergy;
+    }
+
+    void Update()
+    {
+        // Decrease energy over time or based on actions
+        // currentEnergy -= ...
+
+        // Update UI
+        // ...
+    }
 }

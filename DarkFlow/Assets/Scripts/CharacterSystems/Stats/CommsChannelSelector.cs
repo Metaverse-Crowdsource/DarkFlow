@@ -1,7 +1,16 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "CommsChannelSelector", menuName = "Stats/CommsChannelSelector")]
-public class CommsChannelSelector : StatBase
+public class ComsChannelSelector : MonoBehaviour
 {
-    // Additional properties specific to CommsChannelSelector Status
+    public int currentChannel;
+
+    void Update()
+    {
+        // Check for player input to change channel
+        // currentChannel = ...
+
+        // Update UI and handle communication logic
+        // ...
+    }
 }

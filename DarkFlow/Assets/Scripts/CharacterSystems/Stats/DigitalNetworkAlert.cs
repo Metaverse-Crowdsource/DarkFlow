@@ -1,7 +1,14 @@
 using UnityEngine;
-
-[CreateAssetMenu(fileName = "DigitalNetworkAlert", menuName = "Stats/DigitalNetworkAlert")]
-public class DigitalNetworkAlert : StatBase
+using UnityEngine.UI;
+public class DigitalNetworkAlert : MonoBehaviour
 {
-    // Additional properties specific to DigitalNetworkAlert Status
+    private bool isNetworkAvailable;
+
+    void Update()
+    {
+        // Check network status
+        // isNetworkAvailable = ...
+
+        // Update UI visibility
+    }
 }

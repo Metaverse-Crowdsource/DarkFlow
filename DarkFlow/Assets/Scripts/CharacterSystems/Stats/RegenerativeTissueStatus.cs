@@ -1,7 +1,22 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "RegenerativeTissueStatus", menuName = "Stats/RegenerativeTissueStatus")]
-public class RegenerativeTissueStatus : StatBase
+
+public class RegenerativeTissueStatus : MonoBehaviour
 {
-    // Additional properties specific to RegenerativeTissueStatus Status
+    public float regenerationLevel; // Current regeneration level
+    public float maxRegeneration = 100f; // Maximum possible regeneration level
+    public float regenerationRate = 5f; // Rate at which tissue regenerates per second
+
+    void Update()
+    {
+        // Example logic to increase regeneration level
+        if (regenerationLevel < maxRegeneration)
+        {
+            regenerationLevel += Time.deltaTime * regenerationRate;
+            regenerationLevel = Mathf.Min(regenerationLevel, maxRegeneration); // Cap the regeneration level
+        }
+
+        // Update UI or other game elements based on regenerationLevel
+    }
 }

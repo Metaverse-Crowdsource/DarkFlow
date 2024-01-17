@@ -1,7 +1,14 @@
 using UnityEngine;
-
-[CreateAssetMenu(fileName = "DroneVideoScreen", menuName = "Stats/DroneVideoScreen")]
-public class DroneVideoScreen : StatBase
+using UnityEngine.UI;
+public class DroneVideoScreen : MonoBehaviour
 {
-    // Additional properties specific to DroneVideoScreen Status
+    public Camera droneCamera;
+    public RenderTexture droneFeed;
+
+    void Start()
+    {
+        droneCamera.targetTexture = droneFeed;
+    }
+
+    // Update the UI with the live feed
 }

@@ -1,7 +1,13 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "PharmeceuticalStatus", menuName = "Stats/PharmeceuticalStatus")]
-public class PharmeceuticalStatus : StatBase
+
+[System.Serializable]
+public class Drug
 {
-    // Additional properties specific to PharmeceuticalStatus Status
+    public string name;
+    public float effectiveness; // Represents how effective the drug is currently
+    public float cooldown; // Time until the drug can be used again
+    // Add other properties relevant to your game's pharmaceutical system
 }
+

@@ -1,7 +1,18 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "NanobotInfiltration", menuName = "Stats/NanobotInfiltration")]
-public class NanobotInfiltration : StatBase
+public class NanobotInfiltration : MonoBehaviour
 {
-    // Additional properties specific to Nanobot Infiltration
+    public Image nanobotMeter; // Assign this in the inspector
+
+    private float infiltrationLevel = 0f; // Range 0 to 1
+
+    void Update()
+    {
+        // Update the infiltration level based on game events
+        // infiltrationLevel = ...
+
+        // Update UI
+        nanobotMeter.fillAmount = infiltrationLevel;
+    }
 }

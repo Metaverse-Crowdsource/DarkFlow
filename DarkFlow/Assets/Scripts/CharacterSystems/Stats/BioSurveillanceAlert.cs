@@ -1,7 +1,16 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "BioSurveillanceAlert", menuName = "Stats/BioSurveillanceAlert")]
-public class BioSurveillanceAlert : StatBase
+
+public class BioSurveillanceAlert : MonoBehaviour
 {
-    // Additional properties specific to BioSurveillanceAlert Status
+    private bool isScannerDetected;
+
+    void Update()
+    {
+        // Check for scanners in the area
+        // isScannerDetected = ...
+
+        // Update UI
+    }
 }
