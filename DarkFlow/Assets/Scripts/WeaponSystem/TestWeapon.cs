@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Unity.Netcode;
 
-public class TestWeapon : NetworkBehaviour
+
+public class TestWeapon : MonoBehaviour
 {
 
     public GameObject bulletObject;

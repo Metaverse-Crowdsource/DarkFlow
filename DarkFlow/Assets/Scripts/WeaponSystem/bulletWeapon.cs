@@ -1,7 +1,8 @@
 using UnityEngine;
-using Unity.Netcode;
 
-public class bulletWeapon : NetworkBehaviour {
+
+public class bulletWeapon : MonoBehaviour
+{
     public int damage; // Damage the bullet will apply
 
     void OnCollisionEnter(Collision collision) {

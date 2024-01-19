@@ -784,10 +784,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a65433442e687234ab8043c546677d72,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 37407643323386020}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a65433442e687234ab8043c546677d72,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 222671947941112760}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a65433442e687234ab8043c546677d72,
         type: 3}
@@ -805,18 +801,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6233464797961255142}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a65433442e687234ab8043c546677d72,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -8907161250196263378}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a65433442e687234ab8043c546677d72,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8027232384722410602}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a65433442e687234ab8043c546677d72,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5652289010296803950}
   m_SourcePrefab: {fileID: 100100000, guid: a65433442e687234ab8043c546677d72, type: 3}
 --- !u!4 &1469482750486030645 stripped
 Transform:
@@ -830,26 +814,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1436120222904209118}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &37407643323386020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2247144937675617167}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3596108808
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!95 &222671947941112760
 Animator:
   serializedVersion: 5
@@ -998,63 +962,3 @@ MonoBehaviour:
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
---- !u!114 &-8907161250196263378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2247144937675617167}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcbf6eee32d3ec54fa1b9fd9929b7bec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SyncPositionX: 1
-  SyncPositionY: 1
-  SyncPositionZ: 1
-  SyncRotAngleX: 0
-  SyncRotAngleY: 1
-  SyncRotAngleZ: 0
-  SyncScaleX: 0
-  SyncScaleY: 0
-  SyncScaleZ: 0
-  PositionThreshold: 0.001
-  RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
-  UseQuaternionSynchronization: 0
-  UseQuaternionCompression: 0
-  UseHalfFloatPrecision: 1
-  InLocalSpace: 0
-  Interpolate: 1
-  SlerpPosition: 0
---- !u!114 &8027232384722410602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2247144937675617167}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b02d2af4a8667b7439dfdd74d286fa7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TransitionStateInfoList: []
-  m_Animator: {fileID: 222671947941112760}
---- !u!114 &5652289010296803950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2247144937675617167}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 854c882e4139d184fbbe7fef3fa272e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_CharacterController: {fileID: 2129690468861909873}
-  m_ThirdPersonController: {fileID: 5509808468128901478}
-  m_CameraFollow: {fileID: 994559427591439665}
-  m_PlayerInput: {fileID: 3639033402812819131}
