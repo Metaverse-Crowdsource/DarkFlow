@@ -1,16 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 using UnityEngine.InputSystem;
 using TMPro;
+
 public class NPC : MonoBehaviour
 {
-
     [Header("NPC")]
-    [Space]
     [SerializeField] private string npcName; // NPC will get their name - GameObject will not carry NPC's exact name.
     [SerializeField] private string desc; // NPC description - This is their 'Inspect' or 'Examine' text.
     [Space]
@@ -29,7 +24,6 @@ public class NPC : MonoBehaviour
 
     private bool canTalk = false;
 
-
     private void Start()
     {
         npcNameBox.text = "";
@@ -42,7 +36,7 @@ public class NPC : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Keyboard.current.fKey.wasPressedThisFrame)
         {
             OnTalk();
         }
@@ -50,7 +44,7 @@ public class NPC : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             canTalk = true;
         }
@@ -66,8 +60,9 @@ public class NPC : MonoBehaviour
     private void OnDeath()
     {
         var dItem = Instantiate(dropOnDeath);
-        dItem.transform.position = this.transform.position;
+        dItem.transform.position = transform.position;
     }
+
     private void OnTalk()
     {
         if (canTalk)
@@ -76,8 +71,4 @@ public class NPC : MonoBehaviour
             npcChatBox.text = NPCText;
         }
     }
-
-
-
 }
-
